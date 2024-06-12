@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+    <script src="https://unpkg.com/vue@3"></script>
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css">
+    <!-- import JavaScript -->
+    <script src="https://unpkg.com/element-plus"></script>
+    <!--    jquery-->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <title>Element Plus demo</title>
+</head>
+<body>
+<div id="app">
+    <el-form :model="form" label-width="auto" style="max-width: 600px">
+        <el-form-item>
+            <el-input type="hidden" value="${id}" id="joinerId"></el-input>
+        </el-form-item>
+        <el-form-item label="候选人">
+            <span>${name}</span>
+        </el-form-item>
+        <el-form-item label="生日">
+            <span>${birthday?string("yyyy-MM-dd")}</span>
+        </el-form-item>
+        <el-form-item label="头像">
+            <img src="${avatar}" style="width: 200px;height: 200px"/>
+        </el-form-item>
+        <el-form-item label="生日">
+            <video controls autoplay src="${joinVideo}" style="width: 200px;height: 200px"/>
+        </el-form-item>
+        <el-form-item>
+            <el-button type="primary" @click="onSubmit">投票</el-button>
+        </el-form-item>
+    </el-form>
+</div>
+<script>
+    const App = {
+        data: function () {
+            return {
+                form: {
+                    id:""+${id}+""
+                }
+            };
+        },
+        created() {
+            var id = $("#joinerId");
+            id = ${id}
+            console.log(id);
+            let url = window.location.href;
+            let index = url.indexOf("?");
+            console.log(index);
+            let urlParam = url.substring(index + 1)
+            console.log(urlParam);
+            let token = url.split("?")[1];
+            console.log(token);
+            this.token = token;
+        },
+        methods: {
+            onSubmit() {
+                console.log(${id})
+                $.ajax({
+                    type:'post',
+                    headers: {'token': this.token},
+                    url:"http://localhost:10010/server/joiner/voteJoiner/"+${id}+"",
+                    success:function (data){
+                        console.log(data);
+                        if(data.code==200){
+                            alert("投票成功");
+                            location.href="http://localhost:5173/list";
+                        }else{
+                            alert(data.message);
+                            location.href="http://localhost:5173/list";
+                        }
+                    },
+                    error:function (data){
+                        alert(data.message);
+                        location.href="http://localhost:5173/list";
+                    }
+                })
+            }
+        }
+    };
+    const app = Vue.createApp(App);
+    app.use(ElementPlus);
+    app.mount("#app");
+</script>
+</body>
+</html>
