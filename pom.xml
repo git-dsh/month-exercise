@@ -12,6 +12,7 @@
         <module>day0603-gateway</module>
         <module>day0603-server</module>
         <module>month1-exercise</module>
+        <module>month2-exercise</module>
     </modules>
 
     <!-- 设定版本号（必须复制） -->

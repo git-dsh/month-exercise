@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bwie.mapper.TbShopMapper">
+
+    <resultMap id="BaseResultMap" type="com.bwie.pojo.TbShop">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="shopName" column="shop_name" jdbcType="VARCHAR"/>
+            <result property="shopNum" column="shop_num" jdbcType="INTEGER"/>
+            <result property="shopUnit" column="shop_unit" jdbcType="VARCHAR"/>
+            <result property="shopType" column="shop_type" jdbcType="VARCHAR"/>
+            <result property="shopWeight" column="shop_weight" jdbcType="INTEGER"/>
+            <result property="shopVolume" column="shop_volume" jdbcType="INTEGER"/>
+            <result property="shopPrice" column="shop_price" jdbcType="DECIMAL"/>
+            <result property="shopEncode" column="shop_encode" jdbcType="VARCHAR"/>
+            <result property="shopRemark" column="shop_remark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,shop_name,shop_num,
+        shop_unit,shop_type,shop_weight,
+        shop_volume,shop_price,shop_encode,
+        shop_remark
+    </sql>
+</mapper>

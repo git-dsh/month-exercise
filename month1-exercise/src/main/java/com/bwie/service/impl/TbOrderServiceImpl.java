@@ -212,6 +212,7 @@ public class TbOrderServiceImpl extends ServiceImpl<TbOrderMapper, TbOrder>
         MessageVo messageVo = JSON.parseObject(s, MessageVo.class);
         if(!stringRedisTemplate.hasKey(messageVo.getMsgId())){
             channel.basicAck(message.getMessageProperties().getDeliveryTag(),true);
+            return;
         }
         Integer msgOrderId = messageVo.getMsgOrderId();
         Integer msgDriverId = messageVo.getMsgDriverId();
@@ -241,6 +242,7 @@ public class TbOrderServiceImpl extends ServiceImpl<TbOrderMapper, TbOrder>
                 }
             } finally {
                 if(redissonClientLock.isLocked()&&redissonClientLock.isHeldByCurrentThread()){
+                    stringRedisTemplate.delete(messageVo.getMsgId());
                     redissonClientLock.unlock();
                 }
             }

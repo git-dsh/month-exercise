@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bwie.mapper.TbOrderMapper">
+
+    <resultMap id="BaseResultMap" type="com.bwie.pojo.TbOrder">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="orderId" column="order_id" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="orderStatus" column="order_status" jdbcType="VARCHAR"/>
+            <result property="shippedName" column="shipped_name" jdbcType="VARCHAR"/>
+            <result property="shippedMobile" column="shipped_mobile" jdbcType="VARCHAR"/>
+            <result property="shippedAddress" column="shipped_address" jdbcType="VARCHAR"/>
+            <result property="shippedAddressDetails" column="shipped_address_details" jdbcType="VARCHAR"/>
+            <result property="receivingName" column="receiving_name" jdbcType="VARCHAR"/>
+            <result property="receivingMobile" column="receiving_mobile" jdbcType="VARCHAR"/>
+            <result property="receivingAddress" column="receiving_address" jdbcType="VARCHAR"/>
+            <result property="receivingAddressDetails" column="receiving_address_details" jdbcType="VARCHAR"/>
+            <result property="orderFreight" column="order_freight" jdbcType="DECIMAL"/>
+            <result property="payMethod" column="pay_method" jdbcType="VARCHAR"/>
+            <result property="payStatus" column="pay_status" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,order_id,create_time,
+        order_status,shipped_name,shipped_mobile,
+        shipped_address,shipped_address_details,receiving_name,
+        receiving_mobile,receiving_address,receiving_address_details,
+        order_freight,pay_method,pay_status
+    </sql>
+    <select id="selectOrderList" resultType="com.bwie.vo.EsOrderVo">
+        select id,order_id,create_time,
+               order_status,shipped_name,shipped_mobile,
+               shipped_address,shipped_address_details,receiving_name,
+               receiving_mobile,receiving_address,receiving_address_details,
+               order_freight,pay_method,pay_status from tb_order
+        <where>
+            <if test="updateTime!=null">
+                create_time &gt; #{updateTime}
+            </if>
+        </where>
+    </select>
+</mapper>
