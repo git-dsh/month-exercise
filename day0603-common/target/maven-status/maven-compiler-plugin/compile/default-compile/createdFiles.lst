@@ -1,9 +1,0 @@
-com\bwie\pojo\TbAddress.class
-com\bwie\exception\MyGlobalException.class
-com\bwie\util\HttpUtils.class
-com\bwie\pojo\TbUser.class
-com\bwie\util\R.class
-com\bwie\util\HttpUtils$1.class
-com\bwie\util\DuanxinUtil.class
-com\bwie\pojo\TbVote.class
-com\bwie\pojo\TbJoiner.class
